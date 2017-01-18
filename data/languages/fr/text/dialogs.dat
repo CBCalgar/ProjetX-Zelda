@@ -1,0 +1,32 @@
+dialog{
+  id = "dialogue.violette",
+  text = [[
+Coucou,
+comment vas-tu?
+$? Bien
+$? Pas bien
+]]
+}
+
+dialog{
+  id = "dialogue.violette_triste",
+  text = [[
+Et merde!
+]]
+}
+
+dialog{
+  id = "fief.panneau",
+  text = [[
+]]
+}
+
+dialog{
+  id = "ui.save",
+  text = [[
+Voulez-vous sauvegarder votre partie?
+$? Oui
+$? Non
+]]
+}
+
