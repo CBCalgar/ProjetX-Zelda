@@ -3,20 +3,16 @@
 local hearts_builder = {}
 
 local hearts_img = sol.surface.create("hud/hearts.png")
-local life_label_img = sol.surface.create("hearts_label.png", true)
 
-function hearts_builder:new(game)
+function hearts_builder:new(game, config)
 
   local hearts = {}
 
-  function hearts:initialize()
-
-    hearts.surface = sol.surface.create(80, 16)
-    hearts.dst_x = 0
-    hearts.dst_y = 0
-    hearts.max_life_displayed = game:get_max_life()
-    hearts.current_life_displayed = game:get_life()
-  end
+  hearts.surface = sol.surface.create(80, 16)
+  hearts.dst_x = config.x
+  hearts.dst_y = config.y
+  hearts.max_life_displayed = game:get_max_life()
+  hearts.current_life_displayed = game:get_life()
 
   function hearts:repeat_danger_sound()
 
@@ -68,11 +64,6 @@ function hearts_builder:new(game)
     end
   end
 
-  function hearts:set_dst_position(x, y)
-    hearts.dst_x = x
-    hearts.dst_y = y
-  end
-
   function hearts:on_draw(dst_surface)
 
     local x, y = hearts.dst_x, hearts.dst_y
@@ -84,7 +75,6 @@ function hearts_builder:new(game)
       y = height + y
     end
 
-   --- life_label_img:draw(dst_surface, x, y + 10)
     hearts.surface:draw(dst_surface, x, y + 18)
   end
 
@@ -160,11 +150,7 @@ function hearts_builder:new(game)
     hearts:rebuild_surface()
   end
 
-  hearts:initialize()
-
   return hearts
 end
 
 return hearts_builder
-
-

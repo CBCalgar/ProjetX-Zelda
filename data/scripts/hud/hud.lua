@@ -1,13 +1,13 @@
 -- Script that creates a head-up display for a game.
 
 -- Usage:
--- local hud_manager = require("scripts/hud/hud")
--- local hud = hud_manager:create(game)
+-- require("scripts/hud/hud")
 
-local hud_manager = {}
+require("scripts/multi_events")
+local hud_config = require("scripts/hud/hud_config")
 
 -- Creates and runs a HUD for the specified game.
-function hud_manager:create(game)
+local function initialize_hud_features(game)
 
   -- Set up the HUD.
   local hud = {
@@ -15,52 +15,16 @@ function hud_manager:create(game)
     elements = {},
   }
 
-  -- Create each element of the HUD.
-  local hearts_builder = require("scripts/hud/hearts")
-  local rupees_builder = require("scripts/hud/rupees")
-  local bombs_builder = require("scripts/hud/bombs")
-  local arrows_builder = require("scripts/hud/arrows")
-  local item_builder = require("scripts/hud/item")
-  local magic_bar_builder = require("scripts/hud/magic_bar")
-  local small_keys_builder = require("scripts/hud/small_keys")
-  local boss_life_builder = require("scripts/hud/boss_life")
-  local floor_builder = require("scripts/hud/floor")
-
-  local hearts = hearts_builder:new(game)
-  hearts:set_dst_position(-88, 0)
-  hud.elements[#hud.elements + 1] = hearts
-
-  local rupees = rupees_builder:new(game)
-  rupees:set_dst_position(121, 10)
-  hud.elements[#hud.elements + 1] = rupees
-
-  local bombs = bombs_builder:new(game)
-  bombs:set_dst_position(153, 10)
-  hud.elements[#hud.elements + 1] = bombs
-
-  local arrows = arrows_builder:new(game)
-  arrows:set_dst_position(178, 10)
-  hud.elements[#hud.elements + 1] = arrows
-
-  local item = item_builder:new(game, 1)
-  item:set_dst_position(27, 15)
-  hud.elements[#hud.elements + 1] = item
-
-  local magic_bar = magic_bar_builder:new(game, 1)
-  magic_bar:set_dst_position(10, 8)
-  hud.elements[#hud.elements + 1] = magic_bar
-
-  local small_keys = small_keys_builder:new(game)
-  small_keys:set_dst_position(88, 10)
-  hud.elements[#hud.elements + 1] = small_keys
-
-  local boss_life = boss_life_builder:new(game)
-  boss_life:set_dst_position(110, 220)
-  hud.elements[#hud.elements + 1] = boss_life
-
-  local floor = floor_builder:new(game, 1)
-  floor:set_dst_position(280, 40)
-  hud.elements[#hud.elements + 1] = floor
+  for _, element_config in ipairs(hud_config) do
+    local element_builder = require(element_config.menu_script)
+    local element = element_builder:new(game, element_config)
+    if element.set_dst_position ~= nil then
+      -- Compatibility with old HUD element scripts
+      -- whose new() method don't take a config parameter.
+      element:set_dst_position(element_config.x, element_config.y)
+    end
+    hud.elements[#hud.elements + 1] = element
+  end
 
   -- Destroys the HUD.
   function hud:quit()
@@ -68,42 +32,6 @@ function hud_manager:create(game)
     if hud:is_enabled() then
       -- Stop all HUD elements.
       hud:set_enabled(false)
-    end
-  end
-
-  -- Call this function to notify the HUD that the current map has changed.
-  function hud:on_map_changed(map)
-
-    if hud:is_enabled() then
-      for _, menu in ipairs(hud.elements) do
-        if menu.on_map_changed ~= nil then
-          menu:on_map_changed(map)
-        end
-      end
-    end
-  end
-
-  -- Call this function to notify the HUD that the game was just paused.
-  function hud:on_paused()
-
-    if hud:is_enabled() then
-      for _, menu in ipairs(hud.elements) do
-        if menu.on_paused ~= nil then
-          menu:on_paused()
-        end
-      end
-    end
-  end
-
-  -- Call this function to notify the HUD that the game was just unpaused.
-  function hud:on_unpaused()
-
-    if hud:is_enabled() then
-      for _, menu in ipairs(hud.elements) do
-        if menu.on_unpaused ~= nil then
-          menu:on_unpaused()
-        end
-      end
     end
   end
 
@@ -130,13 +58,61 @@ function hud_manager:create(game)
     end
   end
 
+  -- Returns whether the HUD is currently shown.
+  function game:is_hud_enabled()
+    return hud:is_enabled()
+  end
+
+  -- Enables or disables the HUD.
+  function game:set_hud_enabled(enable)
+    return hud:set_enabled(enable)
+  end
+
+  -- Call this function to notify the HUD that the current map has changed.
+  local function hud_on_map_changed(game, map)
+
+    if hud:is_enabled() then
+      for _, menu in ipairs(hud.elements) do
+        if menu.on_map_changed ~= nil then
+          menu:on_map_changed(map)
+        end
+      end
+    end
+  end
+
+  -- Call this function to notify the HUD that the game was just paused.
+  local function hud_on_paused(game)
+
+    if hud:is_enabled() then
+      for _, menu in ipairs(hud.elements) do
+        if menu.on_paused ~= nil then
+          menu:on_paused()
+        end
+      end
+    end
+  end
+
+  -- Call this function to notify the HUD that the game was just unpaused.
+  local function hud_on_unpaused(game)
+
+    if hud:is_enabled() then
+      for _, menu in ipairs(hud.elements) do
+        if menu.on_unpaused ~= nil then
+          menu:on_unpaused()
+        end
+      end
+    end
+  end
+
+  game:register_event("on_map_changed", hud_on_map_changed)
+  game:register_event("on_paused", hud_on_paused)
+  game:register_event("on_unpaused", hud_on_unpaused)
+
   -- Start the HUD.
   hud:set_enabled(true)
-
-  -- Return the HUD.
-  return hud
 end
 
-return hud_manager
-
-
+-- Set up the HUD features on any game that starts.
+local game_meta = sol.main.get_metatable("game")
+game_meta:register_event("on_started", initialize_hud_features)
+return true
