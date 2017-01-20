@@ -254,6 +254,7 @@ item{ id = "arrow", description = "arrow" }
 item{ id = "bomb", description = "bomb" }
 item{ id = "bomb_bag", description = "bomb_bag" }
 item{ id = "bombs_counter", description = "bombs_counter" }
+item{ id = "boomerang", description = "boomerang" }
 item{ id = "bow", description = "bow" }
 item{ id = "bow_silver", description = "bow_silver" }
 item{ id = "heart", description = "heart" }

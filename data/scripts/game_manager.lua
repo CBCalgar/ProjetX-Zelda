@@ -13,6 +13,10 @@ function game_manager:start_game(file_name)
     initial_game:initialize_new_savegame(game)
   end
   game:start()
+  --local item = game:get_item("boomerang")
+  --game:set_item_assigned(1, item)
+ game:get_item("boomerang"):set_variant(1)
+ game:set_item_assigned(1,game:get_item("boomerang"))
 end
 
 return game_manager
