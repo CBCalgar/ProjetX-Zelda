@@ -1,38 +1,15 @@
--- Script that creates an ALTTP-looking dialog box for games.
---
--- Usage:
--- require("scripts/menus/alttp_dialog_box")
---
--- You really have nothing more to do:
--- the dialog box will automatically be used in games.
---
--- To customize the dialog box, call
--- local dialog_box = game:get_dialog_box()
--- to get it and then it provides the following functions:
---
--- - dialog_box:set_style(style):
---   Sets the style of the dialog box for subsequent dialogs.
---   style must be one of:
---   - "box" (default): Usual dialog box.
---   - "empty": No decoration.
---
--- - dialog_box:set_position(position):
---   Sets the vertical position of the dialog box for subsequent dialogs.
---   position must be one of:
---   - "auto": Choose automatically so that the hero is not hidden.
---   - "top": Top of the screen.
---   - "bottom" (default): Bottom of the screen.
---   - a table with x and y integer fields.
---
--- - dialog_box:get_bounding_box():
---   Returns the coordinates on screen and the size of the dialog box.
---   This also works when the dialog box is inactive: in this case it
---   returns the bounding box it would have if it was activated now.
+-- Script that creates a dialog box for a game.
 
-require("scripts/multi_events")
+-- Usage:
+-- local dialog_box_manager = require("scripts/dialog_box")
+-- local dialog_box = dialog_box_manager:create(game)
+
+local dialog_box_manager = {}
+
+
 
 -- Creates and sets up a dialog box for the specified game.
-local function create_dialog_box(game)
+function dialog_box_manager:create(game)
 
   local dialog_box = {
 
@@ -81,7 +58,8 @@ local function create_dialog_box(game)
   local box_height = 60
 
   -- Initialize dialog box data.
-  local dialog_font, dialog_font_size = "alttp", nil
+  --local dialog_font, dialog_font_size = quest_manager:get_dialog_font()
+  local dialog_font, dialog_font_size = "alttp"
   for i = 1, nb_visible_lines do
     dialog_box.lines[i] = ""
     dialog_box.line_surfaces[i] = sol.text_surface.create{
@@ -100,36 +78,36 @@ local function create_dialog_box(game)
       font_size = dialog_font_size,
     text = ">",
   }
+  
+function dialog_box:get_dialog_font()
+   return "alttp", nil
+end
 
   -- Exits the dialog box system.
   function dialog_box:quit()
-    if sol.menu.is_started(dialog_box) then
+      
+  if sol.menu.is_started(dialog_box) then
       sol.menu.stop(dialog_box)
     end
   end
 
-  -- Returns the dialog box.
-  function game:get_dialog_box()
-    return dialog_box
-  end
-
   -- Called by the engine when a dialog starts.
-  game:register_event("on_dialog_started", function(game, dialog, info)
+  function game:on_dialog_started(dialog, info)
 
     dialog_box.dialog = dialog
     dialog_box.info = info
     sol.menu.start(game, dialog_box)
-  end)
+  end
 
   -- Called by the engine when a dialog finishes.
-  game:register_event("on_dialog_finished", function(game, dialog)
-
+  function game:on_dialog_finished(dialog)
+    
     if sol.menu.is_started(dialog_box) then
       sol.menu.stop(dialog_box)
     end
     dialog_box.dialog = nil
     dialog_box.info = nil
-  end)
+  end
 
   -- Determines the position of the dialog box on the screen.
   local function compute_position()
@@ -159,18 +137,28 @@ local function create_dialog_box(game)
     end
   end
 
-  -- See the doc in the header comment.
+  -- Sets the style of the dialog box for subsequent dialogs.
+  -- style must be one of:
+  -- - "box" (default): Usual dialog box.
+  -- - "empty": No decoration.
   function dialog_box:set_style(style)
 
     dialog_box.style = style
   end
 
-  -- See the doc in the header comment.
+  -- Sets the vertical position of the dialog box for subsequent dialogs.
+  -- position must be one of:
+  -- - "auto": Choose automatically so that the hero is not hidden.
+  -- - "top": Top of the screen.
+  -- - "bottom" (default): Bottom of the screen.
+  -- - a table with x and y integer fields.
   function dialog_box:set_position(position)
     dialog_box.position = position
   end
 
-  -- See the doc in the header comment.
+  -- Returns the coordinates on screen and the size of the dialog box.
+  -- This also works when the dialog box is inactive: in this case it
+  -- returns the bounding box it would have if it was activated now.
   function dialog_box:get_bounding_box()
     compute_position()
     local width, height = self.box_img:get_size()
@@ -289,7 +277,6 @@ local function create_dialog_box(game)
   function dialog_box:show_next_dialog()
 
     local next_dialog_id = self.dialog.next
-    self.choices = {}  -- Clear previous choices list.
 
     if next_dialog_id ~= nil then
       -- Show the next dialog.
@@ -477,7 +464,7 @@ local function create_dialog_box(game)
   -- A cursor will be displayed at the specified index when this
   -- line is selected.
   function dialog_box:add_choice(line_index, char_index)
-
+ 
     self.choices[line_index] = char_index
     if self.selected_choice == nil then
       self:set_selected_choice(line_index)
@@ -495,7 +482,7 @@ local function create_dialog_box(game)
   end
 
   function dialog_box:on_command_pressed(command)
-  print('ouloulou')
+print('commande')
     if command == "action" then
 
       -- Display more lines.
@@ -538,6 +525,7 @@ local function create_dialog_box(game)
           until self.choices[line_index] ~= nil
         end
         self:set_selected_choice(line_index)
+
       end
     end
 
@@ -575,11 +563,10 @@ local function create_dialog_box(game)
   end
 
   dialog_box:set_style("box")
+
+  -- Return the created dialog box.
+  return dialog_box
 end
 
--- Set up the dialog box on any game that starts.
-local game_meta = sol.main.get_metatable("game")
-game_meta:register_event("on_started", create_dialog_box)
-
-return true
+return dialog_box_manager
 
