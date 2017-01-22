@@ -19,8 +19,15 @@ function game_manager:start_game(file_name)
   dialog_box = dialog_box_manager:create(game)
   --local item = game:get_item("boomerang")
   --game:set_item_assigned(1, item)
- game:get_item("boomerang"):set_variant(1)
- game:set_item_assigned(1,game:get_item("boomerang"))
+
+
+ --game:get_item("rateau"):set_variant(1)
+-- game:set_item_assigned(1,game:get_item("rateau"))
+
+
+
+ --game:get_item("boomerang"):set_variant(1)
+ --game:set_item_assigned(1,game:get_item("boomerang"))
 end
 
 return game_manager

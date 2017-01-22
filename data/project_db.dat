@@ -259,6 +259,7 @@ item{ id = "bow", description = "bow" }
 item{ id = "bow_silver", description = "bow_silver" }
 item{ id = "heart", description = "heart" }
 item{ id = "quiver", description = "quiver" }
+item{ id = "rateau", description = "Rateau" }
 
 
 

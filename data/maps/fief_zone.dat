@@ -509,6 +509,16 @@ npc{
   sprite = "npc/woman_blue",
 }
 
+chest{
+  name = "coffre",
+  layer = 0,
+  x = 152,
+  y = 125,
+  treasure_name = "rateau",
+  sprite = "entities/chest",
+  cannot_open_dialog = "Oops",
+}
+
 tile{
   layer = 1,
   x = 128,
