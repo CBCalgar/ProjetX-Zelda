@@ -9,6 +9,15 @@ properties{
   music = "village",
 }
 
+teletransporter{
+  layer = 0,
+  x = 72,
+  y = 104,
+  width = 16,
+  height = 16,
+  destination_map = "first_map",
+}
+
 tile{
   layer = 1,
   x = 280,
@@ -217,11 +226,21 @@ tile{
 }
 
 destination{
-  name = "starting_destination",
+  name = "destination",
   layer = 1,
-  x = 152,
-  y = 213,
+  x = 104,
+  y = 109,
   direction = 1,
+}
+
+teletransporter{
+  layer = 1,
+  x = 144,
+  y = 168,
+  width = 16,
+  height = 16,
+  destination_map = "fief_zone",
+  destination = "fief_starting_house",
 }
 
 tile{
