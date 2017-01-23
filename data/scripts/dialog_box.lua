@@ -24,6 +24,9 @@ function dialog_box_manager:create(game)
     choices = {},                -- Whether there is a choice on each line. If yes,
                                  -- the value is the char index of the cursor.
     selected_choice = nil,       -- Selected line (1 is the first one) or nil if there is no question.
+    xp_value = nil,              -- XP BAR Value
+    npc_value = nil,             -- Nom du PNJ
+
 
     -- Displaying text gradually.
     next_line = nil,             -- Next line to display or nil.
@@ -70,7 +73,7 @@ function dialog_box_manager:create(game)
     }
   end
   dialog_box.dialog_surface = sol.surface.create(sol.video.get_quest_size())
-  dialog_box.box_img = sol.surface.create("hud/dialog_box.png")
+  dialog_box.box_img = sol.surface.create("hud/_dialog_box.png")
   dialog_box.choice_cursor_img = sol.text_surface.create{
     horizontal_alignment = "left",
     vertical_alignment = "top",
@@ -78,6 +81,24 @@ function dialog_box_manager:create(game)
       font_size = dialog_font_size,
     text = ">",
   }
+
+
+
+function dialog_box:set_xp_value(xp)
+  
+  if(xp>0) then
+    print("xp affiche")
+     dialog_box.box_img = sol.surface.create("hud/dialog_box.png")
+  else
+     dialog_box.box_img = sol.surface.create("hud/_dialog_box.png")
+  end
+
+
+ dialog_box.xp_value=xp
+end
+function dialog_box:set_npc_value(npc)
+ dialog_box.npc_value=npc
+end
   
 function dialog_box:get_dialog_font()
    return "alttp", nil
@@ -107,6 +128,7 @@ end
     end
     dialog_box.dialog = nil
     dialog_box.info = nil
+     dialog_box.box_img = sol.surface.create("hud/_dialog_box.png")
   end
 
   -- Determines the position of the dialog box on the screen.
@@ -476,13 +498,13 @@ end
     self.selected_choice = line_index
 
     if line_index ~= nil then
-      self.choice_cursor_dst_position.x = self.box_dst_position.x + self.choices[line_index] * 6
+      self.choice_cursor_dst_position.x = self.box_dst_position.x + 100 + self.choices[line_index] * 6
       self.choice_cursor_dst_position.y = self.box_dst_position.y - 8 + line_index * 16
     end
   end
 
   function dialog_box:on_command_pressed(command)
-print('commande')
+
     if command == "action" then
 
       -- Display more lines.
@@ -533,6 +555,7 @@ print('commande')
     return true
   end
 
+
   function dialog_box:on_draw(dst_surface)
 
     local x, y = self.box_dst_position.x, self.box_dst_position.y
@@ -545,7 +568,7 @@ print('commande')
     end
 
     -- Draw the text.
-    local text_x = x + 8
+    local text_x = x + 108
     local text_y = y + 8
     for i = 1, nb_visible_lines do
       self.line_surfaces[i]:draw(self.dialog_surface, text_x, text_y)

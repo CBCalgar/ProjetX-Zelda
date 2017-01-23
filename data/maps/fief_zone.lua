@@ -6,7 +6,7 @@
 
 -- See the Solarus Lua API documentation:
 -- http://www.solarus-games.org/doc/latest
-
+local dialog_box_manager = require("scripts/dialog_box")
 local map = ...
 local game = map:get_game()
 
@@ -26,9 +26,12 @@ end
 function Violette:on_interaction()
 local local_xp_violette=game:get_value("xp_violette");
       game:set_value("xp_violette",local_xp_violette+10)      
-      print(local_xp_violette)
 
- game:start_dialog("dialogue.violette", function (answer)
+
+     dialog_box:set_xp_value(local_xp_violette) 
+     dialog_box:set_npc_value(Violette) 
+
+     game:start_dialog("dialogue.violette", function (answer)
 
       if(answer==3) then -- NO
         game:start_dialog("dialogue.violette_triste")
