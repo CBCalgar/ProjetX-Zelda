@@ -1,4 +1,11 @@
 dialog{
+  id = "_treasure.rateau.1",
+  text = [[
+Bravo
+]]
+}
+
+dialog{
   id = "dialogue.violette",
   text = [[
 Coucou,
