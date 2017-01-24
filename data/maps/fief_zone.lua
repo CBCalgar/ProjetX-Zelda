@@ -7,6 +7,7 @@
 -- See the Solarus Lua API documentation:
 -- http://www.solarus-games.org/doc/latest
 local dialog_box_manager = require("scripts/dialog_box")
+local relation_manager = require("scripts/relation_manager")
 local map = ...
 local game = map:get_game()
 
@@ -24,19 +25,21 @@ function map:on_opening_transition_finished()
 end
 
 function Violette:on_interaction()
-local local_xp_violette=game:get_value("xp_violette");
-      game:set_value("xp_violette",local_xp_violette+10)      
-
-
-     dialog_box:set_xp_value(local_xp_violette) 
+     
+     local xp_value=relation_manager:add_xp(game,10,Violette)
+    
+     dialog_box:set_xp_value(xp_value) 
      dialog_box:set_npc_value(Violette) 
-
      game:start_dialog("dialogue.violette", function (answer)
 
       if(answer==3) then -- NO
-        game:start_dialog("dialogue.violette_triste")
+       dialog_box:set_xp_value(xp_value) 
+       dialog_box:set_npc_value(Violette)        
+       game:start_dialog("dialogue.violette_triste")
       else -- yes
-        game:start_dialog("dialogue.violette")
+       dialog_box:set_xp_value(xp_value) 
+       dialog_box:set_npc_value(Violette)
+       game:start_dialog("dialogue.violette")
       end
   end)
 end
