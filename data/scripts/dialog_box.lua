@@ -85,9 +85,9 @@ function dialog_box_manager:create(game)
 
 
 function dialog_box:set_xp_value(xp)
-  
+
   if(xp>0) then
-    print("xp affiche")
+
      dialog_box.box_img = sol.surface.create("hud/dialog_box.png")
   else
      dialog_box.box_img = sol.surface.create("hud/_dialog_box.png")
@@ -122,13 +122,13 @@ end
 
   -- Called by the engine when a dialog finishes.
   function game:on_dialog_finished(dialog)
-    
+    dialog_box.box_img = sol.surface.create("hud/_dialog_box.png")
     if sol.menu.is_started(dialog_box) then
       sol.menu.stop(dialog_box)
     end
     dialog_box.dialog = nil
     dialog_box.info = nil
-     dialog_box.box_img = sol.surface.create("hud/_dialog_box.png")
+    
   end
 
   -- Determines the position of the dialog box on the screen.

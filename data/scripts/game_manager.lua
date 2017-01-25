@@ -2,6 +2,7 @@ local game_manager = {}
 
 local initial_game = require("scripts/initial_game")
 local dialog_box_manager = require("scripts/dialog_box")
+local relation_manager = require("scripts/relation_manager")
 
 
 sol.language.set_language("fr")
