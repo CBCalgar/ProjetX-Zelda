@@ -19,7 +19,7 @@ function relation_manager:add_xp(game,value,npc)
   
   next_xp=current_xp+value;
   game:set_value(variable_name,next_xp) 
-  print(game:get_value(variable_name))
+  
   return next_xp;
 end
 
@@ -37,7 +37,7 @@ function relation_manager:get_xp_bar(game,npc)
   local variable_name="xp_" .. npc:get_name():lower()
   local current_xp = game:get_value(variable_name)
   
-  print('current_xp'..current_xp)
+  --print('current_xp'..current_xp)
 
 
   -- Si xp toute nouvelle
@@ -45,7 +45,7 @@ function relation_manager:get_xp_bar(game,npc)
     current_xp=xp_default;
   end
   
-  print('current_xp'..current_xp)
+  --print('current_xp'..current_xp)
 
   -- réputation au délà d'exalté avec ce npc  
   if(current_xp>=xp_exalted_cap) then
@@ -81,7 +81,7 @@ function relation_manager:get_xp_bar(game,npc)
     local diff_exalted=xp_neutral_cap
     local percent = diff_exalted / diff
     
-    print('hated '..percent)
+
     xp[0]="xp_evo_0.png"
     xp[1]=percent
 

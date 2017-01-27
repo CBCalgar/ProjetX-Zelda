@@ -26,7 +26,8 @@ function dialog_box_manager:create(game)
     selected_choice = nil,       -- Selected line (1 is the first one) or nil if there is no question.
     xp_value = nil,              -- XP BAR Value
     npc_value = nil,             -- Nom du PNJ
-
+    --nom_surface=nil,
+    --rep_surface=nil,
 
     -- Displaying text gradually.
     next_line = nil,             -- Next line to display or nil.
@@ -86,9 +87,9 @@ function dialog_box_manager:create(game)
  color = dialog_color,
     text = ">",
   }
+ 
 
-
-
+  
 function dialog_box:set_xp_value(xp)
 
   if(xp>0) then
@@ -237,6 +238,19 @@ end
 
   -- The dialog box is being closed.
   function dialog_box:on_finished()
+
+      -- reset des valeurs
+      self.npc_value=nil
+      self.xp_value=nil        
+      --if(self.rep_surface~=nil)then    
+      --     
+      -- self.rep_surface:set_text("")
+      --  self.rep_surface=nil
+      --end
+     -- if(self.nom_surface~=nil)then
+       -- self.nom_surface:set_text("")
+        --self.nom_surface = nil
+      --end
 
     -- Remove overriden command effects.
     if game.set_custom_command_effect ~= nil then
@@ -566,7 +580,10 @@ end
     local x, y = self.box_dst_position.x, self.box_dst_position.y
 
     self.dialog_surface:clear()
-
+   
+    local ecart_x=0
+    local ecart_y=0
+    
     if self.style == "box" then
       -- Draw the dialog box.
       self.box_img:draw(self.dialog_surface, x, y)
@@ -574,6 +591,7 @@ end
 
     
     -- we're talking to a npc
+
     if(dialog_box.npc_value~=nil)then
           -- Draw the xp bar if needed 
          
@@ -663,7 +681,7 @@ end
               end
           end
          
-          local surface_nom = sol.text_surface.create{
+          self.nom_surface = sol.text_surface.create{
             horizontal_alignment = "center",
             vertical_alignment = "top",
             font = "minecraftia",
@@ -672,11 +690,11 @@ end
             text = label_reput,
           }      
           -- on centre le texte
-          local txt_width,txt_height = surface_nom:get_size()
+          local txt_width,txt_height = self.nom_surface:get_size()
           local decal = math.floor((54-txt_width)/2)
-          surface_nom:draw(self.dialog_surface,(50+decal),210) 
+          self.nom_surface:draw(self.dialog_surface,(50+decal),210) 
           -- write the name of the npc
-          local surface_nom = sol.text_surface.create{
+          self.rep_surface = sol.text_surface.create{
             horizontal_alignment = "center",
             vertical_alignment = "top",
             font = "minecraftia",
@@ -684,19 +702,21 @@ end
             color = {114,60,23},
             text = dialog_box.npc_value:get_name(),
           }  
-          local txt_width,txt_height = surface_nom:get_size()
+          local txt_width,txt_height = self.rep_surface:get_size()
           local decal = math.floor((64-txt_width)/2)        
-          surface_nom:draw(self.dialog_surface,50+decal,160)         
-    
+          self.rep_surface:draw(self.dialog_surface,50+decal,160)         
+          ecart_x=118
+          ecart_y=8
     -- end if npc
     else
-      
+         ecart_x=18 
+         ecart_y=15
     end      
 
 
     -- Draw the text.
-    local text_x = x + 118
-    local text_y = y + 8
+    local text_x = x + ecart_x
+    local text_y = y + ecart_y
     for i = 1, nb_visible_lines do
       self.line_surfaces[i]:draw(self.dialog_surface, text_x, text_y)
       text_y = text_y + 14
