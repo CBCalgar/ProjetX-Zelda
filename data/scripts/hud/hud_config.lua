@@ -13,11 +13,19 @@
 local hud_config = {
 
   -- Hearts meter.
+  --{
+  --  menu_script = "scripts/hud/hearts",
+  --  x = -88,
+  --  y = 0,
+  --},
+
+  -- Horloge.
   {
-    menu_script = "scripts/hud/hearts",
-    x = -88,
+    menu_script = "scripts/hud/horloge",
+    x = -78,
     y = 0,
   },
+
 
   -- Rupee counter.
   {
