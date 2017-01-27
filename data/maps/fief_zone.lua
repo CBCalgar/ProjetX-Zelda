@@ -28,7 +28,7 @@ end
 function Violette:on_interaction()
      
      local xp_value=relation_manager:add_xp(game,10,Violette)
-    
+      
      dialog_box:set_xp_value(xp_value) 
      dialog_box:set_npc_value(Violette) 
      game:start_dialog("dialogue.violette", function (answer)
