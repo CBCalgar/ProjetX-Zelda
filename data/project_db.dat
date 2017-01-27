@@ -266,6 +266,8 @@ item{ id = "rateau", description = "Rateau" }
 language{ id = "fr", description = "fr" }
 
 font{ id = "alttp", description = "alttp" }
+font{ id = "default", description = "default" }
 font{ id = "green_digits", description = "Green digits" }
+font{ id = "minecraftia", description = "minecraftia" }
 font{ id = "white_digits", description = "White digits" }
 

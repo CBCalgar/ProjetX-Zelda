@@ -3,7 +3,7 @@
 -- Usage:
 -- local dialog_box_manager = require("scripts/dialog_box")
 -- local dialog_box = dialog_box_manager:create(game)
-
+local relation_manager = require("scripts/relation_manager")
 local dialog_box_manager = {}
 
 
@@ -62,7 +62,10 @@ function dialog_box_manager:create(game)
 
   -- Initialize dialog box data.
   --local dialog_font, dialog_font_size = quest_manager:get_dialog_font()
-  local dialog_font, dialog_font_size = "alttp"
+  
+  
+  local dialog_font, dialog_font_size= "minecraftia", 8
+  local dialog_color = {167,91,39}
   for i = 1, nb_visible_lines do
     dialog_box.lines[i] = ""
     dialog_box.line_surfaces[i] = sol.text_surface.create{
@@ -70,6 +73,7 @@ function dialog_box_manager:create(game)
       vertical_alignment = "top",
       font = dialog_font,
       font_size = dialog_font_size,
+      color = dialog_color,
     }
   end
   dialog_box.dialog_surface = sol.surface.create(sol.video.get_quest_size())
@@ -79,6 +83,7 @@ function dialog_box_manager:create(game)
     vertical_alignment = "top",
     font = dialog_font,
       font_size = dialog_font_size,
+ color = dialog_color,
     text = ">",
   }
 
@@ -498,8 +503,8 @@ end
     self.selected_choice = line_index
 
     if line_index ~= nil then
-      self.choice_cursor_dst_position.x = self.box_dst_position.x + 100 + self.choices[line_index] * 6
-      self.choice_cursor_dst_position.y = self.box_dst_position.y - 8 + line_index * 16
+      self.choice_cursor_dst_position.x = self.box_dst_position.x + 110 + self.choices[line_index] * 6
+      self.choice_cursor_dst_position.y = self.box_dst_position.y - 7 + line_index * 14
     end
   end
 
@@ -567,15 +572,139 @@ end
       self.box_img:draw(self.dialog_surface, x, y)
     end
 
+    
+    -- we're talking to a npc
+    if(dialog_box.npc_value~=nil)then
+          -- Draw the xp bar if needed 
+         
+          local current_xp=dialog_box.xp_value
+          
+          -- Draw XP BAR     
+          local xp_bar = relation_manager:get_xp_bar(game,dialog_box.npc_value)
+          local xp_filler = sol.surface.create("menus/"..xp_bar[0])
+          -- height of the recipient (:50px fillable)    
+          local height_total=52 
+           -- if we're not hated, we make the bar go up
+          if(xp_bar[0]~="xp_evo_0.png") then
+          
+            local start_pix=217    
+            local current_pix=start_pix
+            local cpt=0
+            -- Compute how far we fill the recipient xp
+            local height_computed = math.floor(height_total / xp_bar[1])
+
+            while(cpt<height_computed)do
+              xp_filler:draw(dst_surface,19,current_pix)
+              current_pix=current_pix-1
+              cpt=cpt+1
+            end
+            -- Fill the empty part with de default backgroudn xp_evo_4.png
+            local xp_bck = sol.surface.create("menus/xp_evo_4.png")                
+            local ecart=height_total-height_computed
+            cpt=height_computed
+
+            while(cpt<height_total)do
+              xp_bck:draw(dst_surface,19,current_pix)
+              current_pix=current_pix-1
+              cpt=cpt+1
+            end            
+          -- If we're hated, we make the bar go down
+          else
+            local start_pix=217    
+            local current_pix=start_pix
+            local cpt=0
+            -- Compute how far we fill the recipient xp
+            local height_computed = height_total-(math.floor(height_total / xp_bar[1]))
+
+            while(cpt<height_computed)do
+              xp_filler:draw(dst_surface,19,current_pix)
+              current_pix=current_pix-1
+              cpt=cpt+1
+            end
+            -- Fill the empty part with de default backgroudn xp_evo_4.png
+            local xp_bck = sol.surface.create("menus/xp_evo_4.png")            
+            local ecart=height_total-height_computed
+            cpt=height_computed
+            local current_pix=167 
+            --print(cpt)
+            --print(height_total)
+            while(cpt<height_total)do
+              --print('current_pix:'..current_pix)              
+              xp_bck:draw(dst_surface,19,current_pix)
+              current_pix=current_pix-1
+              cpt=cpt+1
+            end
+           
+          end
+          -- Draw the portrait
+          local portrait = sol.surface.create("npc/"..dialog_box.npc_value:get_name():lower()..".png")  
+          portrait:draw(dst_surface,45,175)
+          -- Write our reputation
+         
+          local label_reput=""
+          local color_reput
+           if(xp_bar[0]=="xp_evo_0.png") then
+              label_reput="Haine"
+              color_reput={197,17,0}
+            else
+              if(xp_bar[0]=="xp_evo_1.png") then
+                label_reput="Neutre"
+                color_reput={7,0,199}
+              else
+                if(xp_bar[0]=="xp_evo_2.png") then
+                  label_reput="Amical"
+                  color_reput={44,179,78}
+                else
+                  if(xp_bar[0]=="xp_evo_3.png") then
+                    label_reput="Intime"
+                    color_reput={157,175,23}
+                  end
+                end
+              end
+          end
+         
+          local surface_nom = sol.text_surface.create{
+            horizontal_alignment = "center",
+            vertical_alignment = "top",
+            font = "minecraftia",
+            font_size = "8",
+            color = color_reput,
+            text = label_reput,
+          }      
+          -- on centre le texte
+          local txt_width,txt_height = surface_nom:get_size()
+          local decal = math.floor((54-txt_width)/2)
+          surface_nom:draw(self.dialog_surface,(50+decal),210) 
+          -- write the name of the npc
+          local surface_nom = sol.text_surface.create{
+            horizontal_alignment = "center",
+            vertical_alignment = "top",
+            font = "minecraftia",
+            font_size = "8",
+            color = {114,60,23},
+            text = dialog_box.npc_value:get_name(),
+          }  
+          local txt_width,txt_height = surface_nom:get_size()
+          local decal = math.floor((64-txt_width)/2)        
+          surface_nom:draw(self.dialog_surface,50+decal,160)         
+    
+    -- end if npc
+    else
+      
+    end      
+
+
     -- Draw the text.
-    local text_x = x + 108
+    local text_x = x + 118
     local text_y = y + 8
     for i = 1, nb_visible_lines do
       self.line_surfaces[i]:draw(self.dialog_surface, text_x, text_y)
-      text_y = text_y + 16
+      text_y = text_y + 14
     end
-
-    -- Draw the answer arrow.
+   
+    
+   
+     -- Draw the answer arrow.
     if self.selected_choice ~= nil then
       self.choice_cursor_img:draw(self.dialog_surface,
           self.choice_cursor_dst_position.x, self.choice_cursor_dst_position.y)
