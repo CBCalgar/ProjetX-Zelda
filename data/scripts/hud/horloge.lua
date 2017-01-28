@@ -43,7 +43,7 @@ function horloge_builder:new(game, config)
           font_size = "10",
           color = {255,235,205},
           text = horloge.txt2,
-        }
+   oHI     }
         local txt_width,txt_height = horloge.surface:get_size()
            
         local decal = math.floor((14-txt_width)/2)              
@@ -127,10 +127,15 @@ function horloge_builder:new(game, config)
     local duree_minute=60
     local minute_courante=math.floor(minute_du_jour/duree_minute)
 
+    local mult = 10^(0)
+    local minute_courante= math.floor((minute_du_jour/duree_minute) * mult + 0.5) / mult    
+   
+
     -- On format l'heure et la minute sur deux chiffres
     local display_heure = tostring(string.format("%02d",heure_courante))
     local display_minute = tostring(string.format("%02d",minute_courante))
     
+
     -- on affiche dans l'horloge
 
     
