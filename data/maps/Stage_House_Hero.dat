@@ -1,0 +1,425 @@
+properties{
+  x = 0,
+  y = 0,
+  width = 320,
+  height = 240,
+  min_layer = 0,
+  max_layer = 2,
+  tileset = "house",
+}
+
+tile{
+  layer = 1,
+  x = 48,
+  y = 48,
+  width = 224,
+  height = 144,
+  pattern = "floor.1",
+}
+
+tile{
+  layer = 1,
+  x = 272,
+  y = 48,
+  width = 24,
+  height = 144,
+  pattern = "wall.4",
+}
+
+tile{
+  layer = 1,
+  x = 24,
+  y = 48,
+  width = 24,
+  height = 144,
+  pattern = "wall.3",
+}
+
+tile{
+  layer = 1,
+  x = 48,
+  y = 24,
+  width = 224,
+  height = 24,
+  pattern = "wall.1",
+}
+
+tile{
+  layer = 1,
+  x = 48,
+  y = 192,
+  width = 224,
+  height = 24,
+  pattern = "wall.2",
+}
+
+tile{
+  layer = 1,
+  x = 24,
+  y = 192,
+  width = 24,
+  height = 24,
+  pattern = "wall.corner.3",
+}
+
+tile{
+  layer = 1,
+  x = 272,
+  y = 192,
+  width = 24,
+  height = 24,
+  pattern = "wall.corner.4",
+}
+
+tile{
+  layer = 1,
+  x = 272,
+  y = 24,
+  width = 24,
+  height = 24,
+  pattern = "wall.corner.2",
+}
+
+tile{
+  layer = 1,
+  x = 24,
+  y = 24,
+  width = 24,
+  height = 24,
+  pattern = "wall.corner.1",
+}
+
+tile{
+  layer = 1,
+  x = 48,
+  y = 48,
+  width = 16,
+  height = 16,
+  pattern = "door_stairs.spiral_down.1",
+}
+
+tile{
+  layer = 1,
+  x = 232,
+  y = 32,
+  width = 32,
+  height = 16,
+  pattern = "wall_torch.1",
+}
+
+tile{
+  layer = 1,
+  x = 80,
+  y = 32,
+  width = 32,
+  height = 16,
+  pattern = "wall_torch.1",
+}
+
+tile{
+  layer = 1,
+  x = 152,
+  y = 24,
+  width = 16,
+  height = 32,
+  pattern = "743",
+}
+
+tile{
+  layer = 1,
+  x = 136,
+  y = 24,
+  width = 16,
+  height = 32,
+  pattern = "742",
+}
+
+tile{
+  layer = 1,
+  x = 168,
+  y = 24,
+  width = 16,
+  height = 32,
+  pattern = "744",
+}
+
+tile{
+  layer = 1,
+  x = 48,
+  y = 176,
+  width = 16,
+  height = 16,
+  pattern = "739",
+}
+
+tile{
+  layer = 1,
+  x = 240,
+  y = 104,
+  width = 32,
+  height = 40,
+  pattern = "746",
+}
+
+tile{
+  layer = 1,
+  x = 224,
+  y = 136,
+  width = 8,
+  height = 8,
+  pattern = "733",
+}
+
+tile{
+  layer = 1,
+  x = 208,
+  y = 104,
+  width = 8,
+  height = 8,
+  pattern = "726",
+}
+
+tile{
+  layer = 1,
+  x = 224,
+  y = 112,
+  width = 8,
+  height = 8,
+  pattern = "730",
+}
+
+tile{
+  layer = 1,
+  x = 232,
+  y = 120,
+  width = 8,
+  height = 8,
+  pattern = "729",
+}
+
+tile{
+  layer = 1,
+  x = 208,
+  y = 120,
+  width = 8,
+  height = 8,
+  pattern = "731",
+}
+
+tile{
+  layer = 1,
+  x = 232,
+  y = 136,
+  width = 8,
+  height = 8,
+  pattern = "734",
+}
+
+tile{
+  layer = 1,
+  x = 224,
+  y = 104,
+  width = 8,
+  height = 8,
+  pattern = "727",
+}
+
+tile{
+  layer = 1,
+  x = 208,
+  y = 136,
+  width = 8,
+  height = 8,
+  pattern = "732",
+}
+
+tile{
+  layer = 1,
+  x = 232,
+  y = 104,
+  width = 8,
+  height = 8,
+  pattern = "728",
+}
+
+tile{
+  layer = 1,
+  x = 24,
+  y = 120,
+  width = 24,
+  height = 32,
+  pattern = "wall_statue.4",
+}
+
+tile{
+  layer = 1,
+  x = 272,
+  y = 152,
+  width = 24,
+  height = 32,
+  pattern = "wall_statue.3",
+}
+
+tile{
+  layer = 1,
+  x = 192,
+  y = 48,
+  width = 8,
+  height = 16,
+  pattern = "cauldron.3",
+}
+
+tile{
+  layer = 1,
+  x = 216,
+  y = 48,
+  width = 8,
+  height = 16,
+  pattern = "cauldron.4",
+}
+
+tile{
+  layer = 1,
+  x = 192,
+  y = 64,
+  width = 32,
+  height = 8,
+  pattern = "cauldron.2",
+}
+
+tile{
+  layer = 1,
+  x = 192,
+  y = 40,
+  width = 32,
+  height = 8,
+  pattern = "cauldron.1",
+}
+
+tile{
+  layer = 1,
+  x = 200,
+  y = 48,
+  width = 16,
+  height = 16,
+  pattern = "cauldron.hole",
+}
+
+tile{
+  layer = 1,
+  x = 232,
+  y = 112,
+  width = 8,
+  height = 8,
+  pattern = "729",
+}
+
+tile{
+  layer = 1,
+  x = 232,
+  y = 128,
+  width = 8,
+  height = 8,
+  pattern = "729",
+}
+
+tile{
+  layer = 1,
+  x = 216,
+  y = 136,
+  width = 8,
+  height = 8,
+  pattern = "733",
+}
+
+tile{
+  layer = 1,
+  x = 208,
+  y = 128,
+  width = 8,
+  height = 8,
+  pattern = "731",
+}
+
+tile{
+  layer = 1,
+  x = 208,
+  y = 112,
+  width = 8,
+  height = 8,
+  pattern = "731",
+}
+
+tile{
+  layer = 1,
+  x = 216,
+  y = 104,
+  width = 8,
+  height = 8,
+  pattern = "727",
+}
+
+tile{
+  layer = 1,
+  x = 216,
+  y = 112,
+  width = 8,
+  height = 8,
+  pattern = "730",
+}
+
+tile{
+  layer = 1,
+  x = 216,
+  y = 120,
+  width = 8,
+  height = 8,
+  pattern = "730",
+}
+
+tile{
+  layer = 1,
+  x = 224,
+  y = 120,
+  width = 8,
+  height = 8,
+  pattern = "730",
+}
+
+tile{
+  layer = 1,
+  x = 216,
+  y = 128,
+  width = 8,
+  height = 8,
+  pattern = "730",
+}
+
+tile{
+  layer = 1,
+  x = 224,
+  y = 128,
+  width = 8,
+  height = 8,
+  pattern = "730",
+}
+
+teletransporter{
+  name = "Exit_Stage_House_Hero",
+  layer = 1,
+  x = 48,
+  y = 48,
+  width = 16,
+  height = 16,
+  destination_map = "first_map",
+  destination = "Exit_stage_House_hero",
+}
+
+destination{
+  name = "Enter_stage_House_hero",
+  layer = 1,
+  x = 56,
+  y = 77,
+  direction = 3,
+}
+
