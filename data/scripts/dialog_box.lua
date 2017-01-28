@@ -620,10 +620,12 @@ end
             local xp_bck = sol.surface.create("menus/xp_evo_4.png")                
             local ecart=height_total-height_computed
             cpt=height_computed
-
+            current_pix=166
+         
             while(cpt<height_total)do
+              print(current_pix)              
               xp_bck:draw(dst_surface,19,current_pix)
-              current_pix=current_pix-1
+              current_pix=current_pix+1
               cpt=cpt+1
             end            
           -- If we're hated, we make the bar go down
@@ -643,13 +645,13 @@ end
             local xp_bck = sol.surface.create("menus/xp_evo_4.png")            
             local ecart=height_total-height_computed
             cpt=height_computed
-            local current_pix=167 
+            local current_pix=166 
             --print(cpt)
             --print(height_total)
             while(cpt<height_total)do
               --print('current_pix:'..current_pix)              
               xp_bck:draw(dst_surface,19,current_pix)
-              current_pix=current_pix-1
+              current_pix=current_pix+1
               cpt=cpt+1
             end
            

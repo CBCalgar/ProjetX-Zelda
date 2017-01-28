@@ -27,7 +27,7 @@ function map:on_opening_transition_finished()
 end
 function Violette:on_interaction()
      
-     local xp_value=relation_manager:add_xp(game,10,Violette)
+     local xp_value=relation_manager:add_xp(game,1000,Violette)
       
      dialog_box:set_xp_value(xp_value) 
      dialog_box:set_npc_value(Violette) 
