@@ -16,7 +16,7 @@ function horloge_builder:new(game, config)
   horloge.dst_x = config.x
   horloge.dst_y = config.y
   horloge.time_played = game:get_value("time_played")
-  print( game:get_value("time_played"))
+
 
 
 
@@ -43,7 +43,7 @@ function horloge_builder:new(game, config)
           font_size = "10",
           color = {255,235,205},
           text = horloge.txt2,
-   oHI     }
+        }
         local txt_width,txt_height = horloge.surface:get_size()
            
         local decal = math.floor((14-txt_width)/2)              

@@ -15,6 +15,8 @@ function horloge_manager:create(game)
         return true  -- Repeat the timer.
         end)
   timer:set_suspended_with_map(false)
+
+ 
 end
 
 
