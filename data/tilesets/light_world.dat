@@ -5665,6 +5665,17 @@ tile_pattern{
 }
 
 tile_pattern{
+  id = "flambeau",
+  ground = "wall",
+  default_layer = 0,
+  x = { 560, 584, 608, 584 },
+  y = { 184, 184, 184, 184 },
+  width = 24,
+  height = 48,
+  repeat_mode = "none",
+}
+
+tile_pattern{
   id = "forest",
   ground = "wall",
   default_layer = 0,

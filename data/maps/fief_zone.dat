@@ -614,7 +614,7 @@ tile{
 tile{
   layer = 0,
   x = 48,
-  y = 216,
+  y = 208,
   width = 32,
   height = 32,
   pattern = "grass.tree_small.green.2",
@@ -906,6 +906,42 @@ tile{
   width = 8,
   height = 16,
   pattern = "house.wall.border.2",
+}
+
+tile{
+  layer = 0,
+  x = 96,
+  y = 208,
+  width = 24,
+  height = 48,
+  pattern = "flambeau",
+}
+
+tile{
+  layer = 0,
+  x = 136,
+  y = 208,
+  width = 24,
+  height = 48,
+  pattern = "flambeau",
+}
+
+tile{
+  layer = 0,
+  x = 192,
+  y = 208,
+  width = 24,
+  height = 48,
+  pattern = "flambeau",
+}
+
+tile{
+  layer = 0,
+  x = 232,
+  y = 208,
+  width = 24,
+  height = 48,
+  pattern = "flambeau",
 }
 
 destructible{

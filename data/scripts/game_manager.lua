@@ -42,6 +42,7 @@ function map_metatable:start_day_night(start)
     local start=start or false
     if(start)then
       self.surface_nuit = nil
+      self.surface_lumiere = nil
       self.animated = false
       local timer = sol.timer.start(self:get_game(), 1000, function()
         local time = self:get_game():get_value("time_played")        
@@ -86,14 +87,24 @@ function map_metatable:display_day_or_night(game,time)
     
     if(heure_courante==0) and (minute_courante==2) and (self.animated==false) then
       -- on met la nuit
-      self.animated=true     
-      self.surface_nuit = sol.surface.create("fogs/night_2.png") 
+     self.animated=true     
+     self.surface_nuit = sol.surface.create("fogs/night_2.png") 
      self.surface_nuit:set_opacity(10)   
      local surface_ecran = sol.surface.create(sol.video.get_quest_size())      
      local coord_x, coord_y = sol.video.get_quest_size()
      self.surface_nuit:draw(surface_ecran,0,0)
      self:fade_it("in",20)
-     
+      
+       -- on allume les lumières
+       
+      --for k in self:get_entities() do
+        --print(k:get_name())
+      --end
+      self.surface_lumiere = sol.surface.create("fogs/light.png") 
+      self.surface_lumiere:set_opacity(255)   
+      local surface_ecran = sol.surface.create(sol.video.get_quest_size())      
+      local coord_x, coord_y = sol.video.get_quest_size()
+      self.surface_lumiere:draw(surface_ecran,96,208)     
     end
 
     if(heure_courante==0) and (minute_courante==6) and (self.animated==false) then
@@ -105,7 +116,7 @@ function map_metatable:display_day_or_night(game,time)
       local coord_x, coord_y = sol.video.get_quest_size()
       self.surface_nuit:draw(surface_ecran,0,0)
       self:fade_it("out",20)
-     
+      
     end
 
 
@@ -212,6 +223,8 @@ function map_metatable:display_fog(fog, speed, angle, opacity)
          --print(self.surface_nuit).get_size()
           --print('ici')         
           self.surface_nuit:draw(dst_surface, 0, 0)
+          --self.surface_lumiere:set_blend_mode("multiply")
+          self.surface_lumiere:draw(dst_surface,96,208)
        end
 end
  
