@@ -1,0 +1,7 @@
+animation{
+  name = "eclaire",
+  src_image = "fogs/light.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 45, frame_height = 45, origin_x = 20, origin_y = 20 },
+  },
+}

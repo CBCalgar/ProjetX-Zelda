@@ -102,9 +102,11 @@ function map_metatable:display_day_or_night(game,time)
       --end
       self.surface_lumiere = sol.surface.create("fogs/light.png") 
       self.surface_lumiere:set_opacity(255)   
-      local surface_ecran = sol.surface.create(sol.video.get_quest_size())      
+      local surface_ecran = sol.surface.create(self:get_size()) 
+     -- print(self:get_size())     
       local coord_x, coord_y = sol.video.get_quest_size()
-      self.surface_lumiere:draw(surface_ecran,96,208)     
+      --print(surface_ecran:get_size())      
+     -- self.surface_lumiere:draw(surface_ecran,96,208)     
     end
 
     if(heure_courante==0) and (minute_courante==6) and (self.animated==false) then
@@ -136,8 +138,8 @@ function map_metatable:fade_it(mode,step)
       local current_opacity = start
 
       local timer = sol.timer.start(self:get_game(), 250, function()
-          print(current_opacity)
-          print(max_opacity)          
+          --print(current_opacity)
+          --print(max_opacity)          
           if(current_opacity<=max_opacity)then
                 self.surface_nuit:set_opacity(current_opacity)  
                 current_opacity = current_opacity + pas
@@ -224,7 +226,8 @@ function map_metatable:display_fog(fog, speed, angle, opacity)
           --print('ici')         
           self.surface_nuit:draw(dst_surface, 0, 0)
           --self.surface_lumiere:set_blend_mode("multiply")
-          self.surface_lumiere:draw(dst_surface,96,208)
+          --print(dst_surface:get_size())            
+          --self.surface_lumiere:draw(dst_surface,96,208)
        end
 end
  

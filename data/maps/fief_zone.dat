@@ -1023,6 +1023,17 @@ teletransporter{
   destination = "Enter_House_Hero",
 }
 
+custom_entity{
+  name = "eclairage",
+  layer = 0,
+  x = 108,
+  y = 221,
+  width = 16,
+  height = 16,
+  direction = 0,
+  sprite = "fogs/eclairage",
+}
+
 tile{
   layer = 1,
   x = 416,

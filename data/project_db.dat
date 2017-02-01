@@ -58,6 +58,7 @@ sprite{ id = "entities/switch", description = "Switch" }
 sprite{ id = "entities/teletransporter", description = "Teletransporter" }
 sprite{ id = "entities/vase", description = "Vase" }
 sprite{ id = "entities/vase_skull", description = "Vase (skull)" }
+sprite{ id = "fogs/eclairage", description = "Eclairage" }
 sprite{ id = "hero/ground1", description = "Grass under hero" }
 sprite{ id = "hero/ground2", description = "Shallow water under hero" }
 sprite{ id = "hero/shield1", description = "Hero shield 1" }
