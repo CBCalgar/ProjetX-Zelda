@@ -9,6 +9,47 @@ local item_names = {
   "bombs_counter",
   --"fire_rod",
   "rateau",
+
+  "rateau",
+  "rateau",
+  "rateau",
+  "rateau",
+  "rateau",
+
+  "rateau",
+  "rateau",
+  "rateau",
+  "rateau",
+  "rateau",
+
+  "rateau",
+  "rateau",
+  "rateau",
+  "rateau",
+  "rateau",
+
+  "rateau",
+  "rateau",
+  "rateau",
+  "rateau",
+  "rateau",
+
+
+  "rateau",
+  "rateau",
+  "rateau",
+  "rateau",
+  "rateau",
+
+  "rateau",
+  "rateau",
+  "rateau",
+  "rateau",
+  "rateau",
+
+  "rateau",
+  "rateau",
+
 --  "ice_rod",
  -- "lamp",
  -- "hammer",
@@ -18,7 +59,7 @@ local item_names = {
  -- "bottle_2",
  -- "bottle_3",
 }
-local items_num_columns = 3
+local items_num_columns = 6
 local items_num_rows = math.ceil(#item_names / items_num_columns)
 
 local icons_img = sol.surface.create("menus/icons.png")
@@ -28,8 +69,8 @@ local movement_speed = 800
 local movement_distance = 160
 
 local function create_item_widget(game)
-  local widget = gui_designer:create(112, 144)
-  widget:set_xy(16 - movement_distance, 16)
+  local widget = gui_designer:create(210, 218)
+  widget:set_xy(16 - movement_distance, 10)
   widget:make_green_frame()
   local items_surface = widget:get_surface()
 
@@ -249,12 +290,12 @@ function inventory_manager:new(game)
   function inventory:on_draw(dst_surface)
 
     item_widget:draw(dst_surface)
-    status_widget:draw(dst_surface)
-    crystals_widget:draw(dst_surface)
-    pieces_of_heart_widget:draw(dst_surface)
+    --status_widget:draw(dst_surface)
+   -- crystals_widget:draw(dst_surface)
+   -- pieces_of_heart_widget:draw(dst_surface)
 
     -- Show the time played.
-    draw_time_played(dst_surface)
+   -- draw_time_played(dst_surface)
 
     -- Show the item cursors.
     draw_item_cursors(dst_surface)

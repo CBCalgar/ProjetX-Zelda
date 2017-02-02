@@ -3,6 +3,8 @@ HUD général:
 	XP Personnage
 	Positionnement XP
 	Système de sauvegarde
+	menu inventaire
+	potager (farm system)
 	
 
 
