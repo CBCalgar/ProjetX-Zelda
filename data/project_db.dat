@@ -76,6 +76,7 @@ sprite{ id = "hero/tunic2", description = "Hero tunic 2" }
 sprite{ id = "hero/tunic3", description = "Hero tunic 3" }
 sprite{ id = "hud/gameover_fade", description = "HUD: Game-over fade" }
 sprite{ id = "hud/piece_of_heart_icon", description = "Piece of Heart icon" }
+sprite{ id = "menus/arrow", description = "menus/arrow" }
 sprite{ id = "menus/hero_head", description = "Menu: hero head" }
 sprite{ id = "menus/solarus_logo", description = "Solarus logo" }
 sprite{ id = "npc/angry_brother", description = "Angry brother" }
@@ -260,9 +261,13 @@ item{ id = "bombs_counter", description = "bombs_counter" }
 item{ id = "boomerang", description = "boomerang" }
 item{ id = "bow", description = "bow" }
 item{ id = "bow_silver", description = "bow_silver" }
+item{ id = "glove", description = "glove" }
 item{ id = "heart", description = "heart" }
+item{ id = "piece_of_heart", description = "piece_of_heart" }
 item{ id = "quiver", description = "quiver" }
 item{ id = "rateau", description = "Rateau" }
+item{ id = "shield", description = "shield" }
+item{ id = "sword", description = "sword" }
 
 
 

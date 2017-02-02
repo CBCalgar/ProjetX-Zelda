@@ -908,42 +908,6 @@ tile{
   pattern = "house.wall.border.2",
 }
 
-tile{
-  layer = 0,
-  x = 96,
-  y = 208,
-  width = 24,
-  height = 48,
-  pattern = "flambeau",
-}
-
-tile{
-  layer = 0,
-  x = 136,
-  y = 208,
-  width = 24,
-  height = 48,
-  pattern = "flambeau",
-}
-
-tile{
-  layer = 0,
-  x = 192,
-  y = 208,
-  width = 24,
-  height = 48,
-  pattern = "flambeau",
-}
-
-tile{
-  layer = 0,
-  x = 232,
-  y = 208,
-  width = 24,
-  height = 48,
-  pattern = "flambeau",
-}
-
 destructible{
   name = "plantation",
   layer = 0,
@@ -1021,17 +985,6 @@ teletransporter{
   height = 16,
   destination_map = "first_map",
   destination = "Enter_House_Hero",
-}
-
-custom_entity{
-  name = "eclairage",
-  layer = 0,
-  x = 108,
-  y = 221,
-  width = 16,
-  height = 16,
-  direction = 0,
-  sprite = "fogs/eclairage",
 }
 
 tile{

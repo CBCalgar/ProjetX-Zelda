@@ -4,7 +4,7 @@ local initial_game = require("scripts/initial_game")
 local dialog_box_manager = require("scripts/dialog_box")
 local relation_manager = require("scripts/relation_manager")
 local horloge_manager = require("scripts/horloge_manager")
-
+local pause_manager = require("scripts/menus/pause")
 
 sol.language.set_language("fr")
 -- Starts the game from the given savegame file,
@@ -21,9 +21,30 @@ function game_manager:start_game(file_name)
   end
   game:start()
   dialog_box = dialog_box_manager:create(game)
-
   horloge = horloge_manager:create(game)
- 
+  pause_menu = pause_manager:create(game) 
+
+
+
+  -- Function called when the game is paused.
+  function game:on_paused()
+
+    -- Tell the HUD we are paused.
+    -- hud:on_paused()
+
+    -- Start the pause menu.
+    sol.menu.start(game, pause_menu)
+  end
+
+  -- Function called when the game is paused.
+  function game:on_unpaused()
+
+    -- Tell the HUD we are no longer paused.
+    -- hud:on_unpaused()
+
+    -- Stop the pause menu.
+    sol.menu.stop(pause_menu)
+  end
 
 end
 

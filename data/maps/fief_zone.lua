@@ -16,8 +16,8 @@ function map:on_started()
 
   -- You can initialize the movement and sprites of various
   -- map entities here.
-  map:display_fog("overworld_smallcloud", speed, angle, 150)
-  map:start_day_night(true)
+  --map:display_fog("overworld_smallcloud", speed, angle, 150)
+  --map:start_day_night(true)
 
 end
 
